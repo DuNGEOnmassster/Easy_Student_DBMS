@@ -1,6 +1,11 @@
 import pymysql
+import tkinter as tk 
+import logging
 import random
 import argparse
+
+from utils.common import *
+
 
 def parse_args():
     parser = argparse.ArgumentParser(description="pymysql ques6 dot 2")
@@ -9,7 +14,7 @@ def parse_args():
                         help="User host")
     parser.add_argument("--user", default='root',
                         help="User name")
-    parser.add_argument("--password", default='',
+    parser.add_argument("--password", default='Zmz020513',
                         help="User password")
     parser.add_argument("--port", default=3306,
                         help="Connection port")
@@ -19,21 +24,22 @@ def parse_args():
     return parser.parse_args()
 
 
-def get_insert_content():
-    return [1,1,1,1]
+def StartGui():
+    root = tk.Tk()  
+    basedesk(root)
+    root.mainloop()
 
 
 def connect(args):
-    conn = pymysql.connect(host=args.host, user=args.user, password=args.password, port=args.port, db=args.dbname)
+    try:
+        conn = pymysql.connect(host=args.host, user=args.user, password=args.password, port=args.port, db=args.dbname)
+    except Exception as e:
+        logging.exception(e)
+    
+    StartGui()
     cursor = conn.cursor()
 
-    # get insert data
-    trade = get_insert_content()
-    # excute insert script
-    for i in range((len(trade))):
-        data = cursor.execute(f"show tables;")
-        print(f"Insert {i+1}: {data}")
-    conn.commit()
+    # Todo
 
     cursor.close()
 
