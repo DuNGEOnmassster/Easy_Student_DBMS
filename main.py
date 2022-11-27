@@ -25,25 +25,13 @@ def parse_args():
 
 
 def StartGui():
-    root = tk.Tk()  
-    basedesk(root)
-    root.mainloop()
-
-
-def connect(args):
-    try:
-        conn = pymysql.connect(host=args.host, user=args.user, password=args.password, port=args.port, db=args.dbname)
-    except Exception as e:
-        logging.exception(e)
-    
-    StartGui()
-    cursor = conn.cursor()
-
-    # Todo
-
-    cursor.close()
+    init_win = tk.Tk()  
+    # basedesk(root)
+    root = MY_GUI(init_win)
+    root.set_init_window()
+    init_win.mainloop()
 
 
 if __name__ == "__main__":
     args = parse_args()
-    connect(args)
+    StartGui()
