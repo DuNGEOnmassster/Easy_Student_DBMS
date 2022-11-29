@@ -1,35 +1,7 @@
+from tkinter import *
 import hashlib
-import pymysql
-import tkinter as tk 
-from tkinter import ttk,END,Label,Text,Button
-from PIL import Image, ImageTk 
 import time
-
-class basedesk():
-    def __init__(self,master):
-        
-        self.root=master
-        self.root.title('Easy Student DBMS')
-        self.root.geometry('1000x700')
-        initGUI(self.root)
-
-
-class initGUI(): 
-    def __init__(self,master):
-        global im
-        global image
-        self.master=master
-        self.master.config(bg='Magenta')
-        self.initwin=tk.Frame(self.master,)
-        self.initwin.pack()
-        self.canvas = tk.Canvas(self.initwin, width = 1000, height = 1000, bg = 'blue')      
-
-        self.title=tk.Label(self.initwin,text="Easy Student DBMS",font=("微软雅黑",30))
-        self.author=tk.Label(self.initwin,text="NormanZ",font=("微软雅黑",24))
-        self.canvas.create_window(400,150,anchor="nw",width=300,height=70,window=self.title)
-
-        image=Image.open('utils/bg.png')
-        im=ImageTk.PhotoImage(image)
+from PIL import Image, ImageTk
 
 
 class MY_GUI():
@@ -42,8 +14,8 @@ class MY_GUI():
         self.init_window_name.title("文本处理工具_v1.2")           #窗口名
         #self.init_window_name.geometry('320x160+10+10')                         #290 160为窗口大小，+10 +10 定义窗口弹出时的默认展示位置
         self.init_window_name.geometry('1068x681+10+10')
-        # self.init_window_name["bg"] = "white"                                    #窗口背景色，其他背景色见：blog.csdn.net/chl0000/article/details/7657887
-        self.init_window_name.attributes("-alpha",0.9)                          #虚化，值越小虚化程度越高
+        #self.init_window_name["bg"] = "pink"                                    #窗口背景色，其他背景色见：blog.csdn.net/chl0000/article/details/7657887
+        #self.init_window_name.attributes("-alpha",0.9)                          #虚化，值越小虚化程度越高
         #标签
         self.init_data_label = Label(self.init_window_name, text="待处理数据")
         self.init_data_label.grid(row=0, column=0)
@@ -61,14 +33,13 @@ class MY_GUI():
         #按钮
         self.str_trans_to_md5_button = Button(self.init_window_name, text="字符串转MD5", bg="lightblue", width=10,command=self.str_trans_to_md5)  # 调用内部方法  加()为直接调用
         self.str_trans_to_md5_button.grid(row=1, column=11)
-        # #背景
-        # self.initwin=tk.Frame(self.init_window_name,)
-        # self.initwin.pack()
-        # self.canvas = tk.Canvas(self.initwin, width = 1000, height = 1000, bg = 'blue')      
-        # im = ImageTk.PhotoImage(Image.open('data/bg2.png'))
-        # # Put image into Main GUI
-        # self.canvas.create_image(0,0,anchor='nw',image = im)
-        # self.canvas.pack() 
+        #image
+        self.canvas.create_window(400,150,anchor="nw",width=300,height=70,window=self.title)
+        im = ImageTk.PhotoImage(Image.open('data/bg2.png'))
+
+        # Put image into Main GUI
+        self.canvas.create_image(0,0,anchor='nw',image = im)
+        self.canvas.pack() 
 
     #功能函数
     def str_trans_to_md5(self):
@@ -107,3 +78,15 @@ class MY_GUI():
         else:
             self.log_data_Text.delete(1.0,2.0)
             self.log_data_Text.insert(END, logmsg_in)
+
+
+def gui_start():
+    init_window = Tk()              #实例化出一个父窗口
+    ZMJ_PORTAL = MY_GUI(init_window)
+    # 设置根窗口默认属性
+    ZMJ_PORTAL.set_init_window()
+
+    init_window.mainloop()          #父窗口进入事件循环，可以理解为保持窗口运行，否则界面不展示
+
+
+gui_start()

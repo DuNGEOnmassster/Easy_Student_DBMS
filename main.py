@@ -14,7 +14,7 @@ def parse_args():
                         help="User host")
     parser.add_argument("--user", default='root',
                         help="User name")
-    parser.add_argument("--password", default='Zmz020513',
+    parser.add_argument("--password", default='******',
                         help="User password")
     parser.add_argument("--port", default=3306,
                         help="Connection port")
@@ -26,9 +26,9 @@ def parse_args():
 
 def StartGui():
     init_win = tk.Tk()  
-    # basedesk(root)
     root = MY_GUI(init_win)
     root.set_init_window()
+    # basedesk(init_win)
     init_win.mainloop()
 
 
